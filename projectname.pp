@@ -22,4 +22,17 @@ file { '/etc/resolv.conf':
     source => '/puppet/resolv.conf',
     mode => '0644'
 ,}
+
+cron { 'job':
+   command => 'cd /puppet && git pull',
+   user => 'root',
+   minute => '*'
+,}
+
+cron { 'puppet_apply':
+    command => 'puppet apply /puppet/projectname.pp'
+    user => root
+    minute => '*'
+,}
+
 } # End node avm5.llnl.gov
